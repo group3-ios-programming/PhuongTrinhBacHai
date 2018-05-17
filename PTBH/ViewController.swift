@@ -67,7 +67,42 @@ class ViewController: UIViewController,UITextFieldDelegate {
         
     }
     @IBAction func btn_KetQua(_ sender: Any) {
-        TinhToan()
+        
+        if(checkInput())
+        {
+            TinhToan()
+        }
+        else
+        {
+            let alert:UIAlertController = UIAlertController(title:"Thông báo", message:"Sai định dạng, mời nhập lại", preferredStyle: UIAlertControllerStyle.alert)
+            present(alert, animated:true, completion:nil)
+            let btnOK:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil)
+            alert.addAction(btnOK)
+            lb_TextA.text = ""
+            lb_TextB.text = ""
+            lb_TextC.text = ""
+            
+            lb_TextA.isEnabled = true
+            lb_TextB.isEnabled = true
+            lb_TextC.isEnabled = true
+            
+        }
+        
+
+    }
+    func checkInput ()->Bool
+    {
+        if(lb_TextA.text == "." || lb_TextB.text == "." || lb_TextC.text == ".")
+        {
+            return false
+        }
+        if(lb_TextA.text == "-" || lb_TextB.text == "-" || lb_TextC.text == "-")
+        {
+            return false
+        }
+
+        
+        return true
     }
    
     
@@ -128,11 +163,14 @@ class ViewController: UIViewController,UITextFieldDelegate {
     {
         if (lb_TextA.text == "" || lb_TextB.text == "" || lb_TextC.text == "" )
         {
-            lb_ThongBao.isHidden = false
-            lb_ThongBao.text = "Bạn chưa nhập các số."
-            lb_TextA.isEnabled = false
-            lb_TextB.isEnabled = false
-            lb_TextC.isEnabled = false
+            lb_ThongBao.isHidden = true
+            let alert:UIAlertController = UIAlertController(title:"Thông báo", message:"Bạn chưa nhập các hệ số", preferredStyle: UIAlertControllerStyle.alert)
+            present(alert, animated:true, completion:nil)
+            let btnOK:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:nil)
+            alert.addAction(btnOK)
+            lb_TextA.isEnabled = true
+            lb_TextB.isEnabled = true
+            lb_TextC.isEnabled = true
         }
         else
         {
